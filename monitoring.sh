@@ -1,5 +1,5 @@
 wall $'#Architecture : '`uname -a`\
-$'\n#CPU physical : '`lscpu | grep 'CPU(s):                ' | sed 's/CPU(s):                          //g'`\
+$'\n#CPU physical : '`cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l`\
 $'\n#vCPU : '`lscpu | grep 'CPU(s):                ' | sed 's/CPU(s):                          //g'`\
 $'\n'`free -m | awk 'NR==2{printf "#Memory Usage: %sMiB/%sMiB (%.2f%%)", $3,$2,$3*100/$2 }'`\
 $'\n'`df -BM --total | grep 'total' | awk '{printf "#Disk Usage : %dMB/%dMB (%s)", $3, $2, $5}'`\
